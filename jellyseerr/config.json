@@ -1,9 +1,5 @@
 {
-  "arch": [
-    "aarch64",
-    "amd64",
-    "armv7"
-  ],
+  "arch": ["aarch64", "amd64", "armv7"],
   "codenotary": "alexandrep.github@gmail.com",
   "description": "fork of overseerr for jellyfin support",
   "devices": [
@@ -62,14 +58,15 @@
   "host_network": true,
   "image": "ghcr.io/alexbelgium/jellyseerr-{arch}",
   "init": false,
-  "map": [
-    "config:rw"
-  ],
+  "map": ["config:rw"],
   "name": "Jellyseerr",
   "options": {
     "TYPE": "emby",
     "TZ": "Europe/Paris"
   },
+  "ingress": true,
+  "ingress_entry": "jellyseerr",
+  "panel_icon": "mdi:movie-filter-outline",
   "ports": {
     "5055/tcp": 5055
   },
