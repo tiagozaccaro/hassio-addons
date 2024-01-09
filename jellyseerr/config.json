@@ -54,18 +54,23 @@
     "/dev/nvme1",
     "/dev/nvme2"
   ],
-  "environment": {},
-  "host_network": true,
+  "environment": {
+    "PGID": "0",
+    "PUID": "0"
+  },
   "image": "ghcr.io/alexbelgium/jellyseerr-{arch}",
+  "ingress": true,
+  "ingress_entry": "sonarr",
   "init": false,
-  "map": ["config:rw"],
+  "map": ["config:rw", "share:rw", "media:rw", "ssl"],
   "name": "Jellyseerr",
   "options": {
+    "PGID": 0,
+    "PUID": 0,
     "TYPE": "emby",
     "TZ": "Europe/Paris"
   },
-  "ingress": true,
-  "ingress_entry": "jellyseerr",
+
   "panel_icon": "mdi:movie-filter-outline",
   "ports": {
     "5055/tcp": 5055
@@ -73,10 +78,13 @@
   "ports_description": {
     "5055/tcp": "web interface"
   },
-  "privileged": [],
+  "privileged": ["SYS_ADMIN", "DAC_READ_SEARCH"],
   "schema": {
     "TYPE": "list(emby|jellyfin)",
-    "TZ": "str?"
+    "TZ": "str?",
+    "PGID": "int",
+    "PUID": "int",
+    "ingress_disabled": "bool?"
   },
   "slug": "jellyseerr",
   "udev": true,
